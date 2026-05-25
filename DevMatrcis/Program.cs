@@ -1,78 +1,62 @@
-﻿// See https://aka.ms/new-console-template for more information
-//operators
-//logical // &&,||,!
-//relational // ==,!=,>,<,>=,=<
-//Statement
-//conditational statement
-//if else
-//switch case
-//loopings
-//foreach
-//for
-//do while
-//while
+﻿//create a coffee sale app using switch cas
+Console.WriteLine("Welcome to Dev Coffee, what would you like to order");
 
+Top:
+Console.WriteLine("select your order by picking the order number ");
+Console.WriteLine("1.BlackCoffee == 500.");
+Console.WriteLine("2.Tea == 1500.");
+Console.WriteLine("3.CreamCoffee == 600");
+Console.WriteLine("4.Expresso == 2000");
+Console.WriteLine("5.Cappuccino == 3500");
+Console.WriteLine("6. Bread == 500");
 
-int v = 7;
-int i = 5;
-int x = 5;
-int age = 18;
+int choice = int.Parse(Console.ReadLine());
 
-//if else
-if (v > i)
-{
-    Console.WriteLine("welcome to you are in!");
-}
-else if (x == i)
-{
-    Console.WriteLine("not partially in let try again");
-}
-else
-{
-    Console.WriteLine("you are out!");
-}
+int price = 0;
+string coffeeName = "";
 
-
-if (v < age || age == v || v > age)
-{
-    Console.WriteLine("welcome to you are in!");
-}
-else
-{
-    Console.WriteLine("you are out!");
-}
-
-
-//switch
-
-int day = 3;
-switch (day)
+switch (choice)
 {
     case 1:
-        Console.WriteLine("Monday");
+        coffeeName = "BlackCoffee";
+        price = 500;
         break;
     case 2:
-        Console.WriteLine("Tuesday");
+        coffeeName = "Tea";
+        price = 1500;
         break;
     case 3:
-        Console.WriteLine("wednesday");
+        coffeeName = "CreamCoffee";
+        price = 600;
         break;
     case 4:
-        Console.WriteLine("Thursday");
+        coffeeName = "Expresso";
+        price = 2000;
         break;
     case 5:
-        Console.WriteLine("Friday");
+        coffeeName = "Cappuccino";
+        price = 3500;
         break;
     case 6:
-        Console.WriteLine("Saturday Note: we don work on weekends");
+        coffeeName = "Bread";
+        price = 500;
         break;
-    case 7:
-        Console.WriteLine("Sunday");
-        break;
-    default: 
-        Console.WriteLine("sorry invalid days");
-        break;
+    default:
+        Console.WriteLine("Please go back to the available options." +
+            " Please try again by clicking enter.");
+        Console.ReadLine();
+        goto Top;
 }
 
+Console.Write($"How many {coffeeName} do you want? ");
+int qty = int.Parse(Console.ReadLine());
 
+int total = price * qty;
 
+// Output with labels
+Console.WriteLine("\n--- Receipt ---");
+Console.WriteLine($"Coffee: {coffeeName}");
+Console.WriteLine($"Unit Price: ₦ {price}");
+Console.WriteLine($"Quantity: {qty}");
+Console.WriteLine($"Total: ₦ {total}");
+    
