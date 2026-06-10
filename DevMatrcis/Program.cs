@@ -1,5 +1,5 @@
 ﻿
 using DevMatrcis;
 
-ClassB inherit = new ClassB(); //instiation
-inherit.Register();
+
+Calculator.Add(6, 9, 8);
