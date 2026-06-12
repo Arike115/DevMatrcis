@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevMatrcis
 {
-    public class ClassD : IStudent
+    public class ClassD 
     {
         public void Click()
         {
