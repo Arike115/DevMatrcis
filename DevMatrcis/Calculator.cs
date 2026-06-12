@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevMatrcis
 {
-    public class Calculator : Student
+    public class Calculator : Colors
     {
         public static void Add( int a , int b )
         {
@@ -24,9 +24,9 @@ namespace DevMatrcis
             Console.WriteLine(f);
         }
 
-        public override void GetStudent()
+        public override void ShowColor()
         {
-           Console.WriteLine("This is a calculator class");
+            throw new NotImplementedException();
         }
     }
 }
