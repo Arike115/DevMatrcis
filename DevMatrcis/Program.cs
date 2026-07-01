@@ -1,22 +1,41 @@
-﻿using DevMatrcis;
+﻿//Ilist
+//list
+//collection
+//ienumerable
 
-//Console.WriteLine("please enter the first value");
-//int firstvalue = int.Parse(Console.ReadLine());
-//Console.WriteLine("please enter the second value");
-//int secondvalue = int.Parse(Console.ReadLine());
+List<string> names = new List<string> ();   
+names.Add("John");
+names.Add("Jane");
+names.Add("Bob");
+names.Add("Alice");
+names.Add("Charlie");
+names.Add("David");
+names.Add("Eve");
+MyIlistMethod(names);
+MycollectionMethod(names);
+
+foreach (var name in names)
+{
+    Console.WriteLine(name);
+}
+MyIEnumerableMethod(names);
+
+static void MyIlistMethod(IList<string> myList)
+{
+    myList.Add("Frank");
+    myList.Insert(2, "Grace");
+}
+
+static void MycollectionMethod(ICollection<string> myCollection)
+{
+    myCollection.Add("Hank");
+    myCollection.Remove("Alice");
+}   
 
 
-//Console.WriteLine("*************");
-//Books.Booklist(firstvalue,secondvalue);
-////static
-//Sales.BookDetails();
-
-////nonstatic
-
-////class object = new constructor (); // instantiation
-//Sales   salerep = new Sales(); // instantiation
-//salerep.BookInfor();
-
-UserDetails user = new UserDetails(101,"Ayomide Babalola",36);
-user.UserInformation();
-
+static void MyIEnumerableMethod(IEnumerable<string> myEnumerable)
+{
+    var result = myEnumerable.Count();
+    Console.WriteLine(result);
+  
+}
