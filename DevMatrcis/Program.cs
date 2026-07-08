@@ -1,46 +1,29 @@
-﻿//queue first in first out
-//Dictionary is a collection of key value pairs, which is used to store data in a
-//key value pair format. It is similar to a list,
-//but it allows you to access values using keys instead of indexes.
-// The Dictionary class is a generic collection,
-// which means that you can specify the type of keys and values that it will store.
-// The Dictionary class provides methods for adding,
-// removing, and accessing key value pairs,
-// as well as for checking if a key exists in the dictionary.
+﻿//Linq can be used to query collections in a more readable and concise way.
+//Here's an example of how to use LINQ in C#:
+//LINQ is language integrated query,
+//which allows you to query collections in a more readable and concise way.
+//It provides a set of methods that can be used to filter, sort,
+//and transform data in collections such as arrays, lists, and dictionaries.
 
-using System;
 
-Dictionary<int, string> dictionaryValues = new Dictionary<int, string>();
-dictionaryValues.Add(1,"C#");
-dictionaryValues.Add(2,"Java");
-dictionaryValues.Add(3,"Python");
-dictionaryValues.Add(4,"JavaScript");
-dictionaryValues.Add(5,"C++");  
+List<string> Households = new List<string>
+{"chairs","bed","Plates", "TV","Table","Frames","wall clock","Desk","Jug"};
 
-foreach (var item in dictionaryValues)
+
+//linq query
+//query syntax
+var result = from item in Households
+             where item.Length == 3
+             select item; //dapper
+
+//foreach (var it in result)
+//{
+//    Console.WriteLine(it);
+//}
+
+//method syntax /fluent syntax
+var result2 = Households.Where(item => item.Length == 3); //entity framework
+foreach (var i in result2)
 {
-    Console.WriteLine("Chapter: " + item.Key + ", Value: " + item.Value);
+    Console.WriteLine(i);
 }
-
-
-
-
-
-
-
-
-
-//Queue<string> queue = new Queue<string>();    
-//queue.Enqueue("Toyota");
-//queue.Enqueue("Honda");
-//queue.Enqueue("Ford");
-//queue.Enqueue("Chevrolet");
-//queue.Enqueue("Nissan");
-
-//Console.WriteLine("the total count is " + queue.Count());
-//Console.WriteLine("the first element is " + queue.Dequeue()); 
-//Console.WriteLine("the final total count is " + queue.Count());
-//Console.WriteLine("the first element is " + queue.Dequeue());
-//Console.WriteLine("the final total count is " + queue.Count());
-
-
