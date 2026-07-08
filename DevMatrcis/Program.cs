@@ -1,29 +1,52 @@
-﻿//Linq can be used to query collections in a more readable and concise way.
-//Here's an example of how to use LINQ in C#:
-//LINQ is language integrated query,
-//which allows you to query collections in a more readable and concise way.
-//It provides a set of methods that can be used to filter, sort,
-//and transform data in collections such as arrays, lists, and dictionaries.
+﻿//filtering e.g where
+//projecting e.g select, selectmany
+//ordering e.g orderby, orderbydescending, thenby, thenbydescending
+//setoperators
+//conversion methods
+//element operators
+//aggregation methods
+//quantifiers
 
 
-List<string> Households = new List<string>
-{"chairs","bed","Plates", "TV","Table","Frames","wall clock","Desk","Jug"};
+//filtering 
+using DevMatrcis;
 
+List<int > Numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };   
+//var Numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-//linq query
+//method syntax
+var highvalues = Numbers.Where(n => n > 4);
+
 //query syntax
-var result = from item in Households
-             where item.Length == 3
-             select item; //dapper
+var highvalues2 = from n in Numbers
+                  where n > 4
+                  select n;
 
-//foreach (var it in result)
+//foreach (var k in highvalues2)
 //{
-//    Console.WriteLine(it);
+//    Console.WriteLine(k);
 //}
 
-//method syntax /fluent syntax
-var result2 = Households.Where(item => item.Length == 3); //entity framework
-foreach (var i in result2)
+
+//Data for the student class
+List<Student> students = new List<Student>
 {
-    Console.WriteLine(i);
+    new Student { StudentId = 1, StudentName = "John", StudentAge = 20 },
+    new Student { StudentId = 2, StudentName = "Jane", StudentAge = 22 },
+    new Student { StudentId = 3, StudentName = "Bob", StudentAge = 19 },
+    new Student { StudentId = 4, StudentName = "Alice", StudentAge = 21 },
+    new Student { StudentId = 5, StudentName = "Tom", StudentAge = 23 }
+};
+
+//projecting
+//query syntax
+var result = from s in students
+             select new { s.StudentName, s.StudentAge };
+
+//method syntax
+var result2 = students.Select(s => new { s.StudentName, s.StudentAge });
+
+foreach (var name in result)
+{
+    Console.WriteLine("Student Name: {0}, Age: {1}",name.StudentName,name.StudentAge);
 }
