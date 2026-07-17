@@ -23,46 +23,68 @@ List<Student> students = new List<Student>
 
 };
 
-//ordering
-//method syntax
-var orderedStudents = students.OrderByDescending(s => s.StudentName).ThenByDescending(s=>s.StudentAge);
+//aggregate method
+//min,max,sum,avarage,count,aggregate
+var studentmax = students.Max(s => s.StudentAge);
+Console.WriteLine(studentmax);
 
-//query syntax
-var orderedStudentsQuery = from s in students
-                           orderby s.StudentAge
-                           select s;
+var studentmin = students.Min(s => s.StudentAge);
+Console.WriteLine(studentmin);
+var studentavg = students.Average(s => s.StudentAge);
+Console.WriteLine(studentavg);
+var studentcount = students.Count();
+Console.WriteLine(studentcount);
+var studentsum = students.Sum(s => s.StudentAge);
+Console.WriteLine(studentsum);
+var studentlongcount = students.LongCount();
+Console.WriteLine(studentlongcount);
 
+//quantifiers
+//all, any, contains
 
-//foreach (var student in orderedStudents)
-//{
-//    Console.WriteLine($"StudentName: {student.StudentName}, StudentAge: {student.StudentAge}");
-//}
+var allstudentage = students.All(s => s.StudentAge > 19);
+Console.WriteLine(allstudentage);
+var anystudentage = students.Any(s => s.StudentAge > 23);
+Console.WriteLine(anystudentage);
 
+var std = new Student {StudentId = 3, StudentName = "Bob", StudentAge = 19  };
+List<string> alphalist = new List<string> { "A", "B", "C", "D", "E" };
 
-//set operators
-List<int> FirstDigits = new List<int> { 4, 6, 7, 8, 9, 1, 1, 3, 9, 9, 10, 11 };
-List<int> SecondDigits = new List<int> {1, 2, 3, 4, 5, 5, 1, 3, 9, 9, 10, 11 };
-
-//Distinct is to eliminate duplicate values from a collection.
-//It returns a new collection that contains only the unique elements
-//from the original collection.
-var distinctFirstDigits = FirstDigits.Distinct();
-
-//intesect is to find the common elements between two collections.
-var commonDigits = FirstDigits.Intersect(SecondDigits);
-
-//union is to combine two collections into one collection that
-//contains all the elements from both collections, without duplicates.
-
-var unionDigits = FirstDigits.Union(SecondDigits);
+var containresult = students.Contains(std);
+Console.WriteLine(containresult);
 
 
-//except is to find the elements that are present in one
-//collection but not in another.
-var exceptDigits = FirstDigits.Except(SecondDigits);
 
-foreach (var digit in exceptDigits)
-{
-    Console.WriteLine($"Distinct First Digits: {digit}");
-}
 
+
+
+
+
+
+
+//conversion method
+var results = students.Select(s => s.StudentName).ToList();
+var result = students.Select(s => s.StudentName).ToArray();
+var data = students.ToDictionary(s => s.StudentId, s => s.StudentName);
+
+results.Sort();
+
+////element operators
+////first, firstordefault,
+////last, lastordefault,
+////single, singleordefault,
+////elementat, elementatordefault
+//List<string> alphalist = new List<string> { "A", "B", "C", "D", "E" };
+//List<int> numlist = new List<int> {327, 890};
+//List<string> alphalist2 = new List<string> {};
+//List<int> numlist2 = new List<int> { };
+////Console.WriteLine(alphalist.FirstOrDefault());
+////Console.WriteLine(numlist.LastOrDefault());
+////Console.WriteLine(alphalist.SingleOrDefault(x =>x =="F" ));
+////Console.WriteLine(numlist.SingleOrDefault());
+////Console.WriteLine(alphalist.ElementAt(10));
+//Console.WriteLine(numlist.ElementAtOrDefault(2));
+
+
+
+Console.ReadKey();
