@@ -1,90 +1,66 @@
-﻿//filtering e.g where
-//projecting e.g select, selectmany
-//ordering e.g orderby, orderbydescending, thenby, thenbydescending
-//setoperators e.g union, intersect, except,Distinct
-//conversion methods
-//element operators
-//aggregation methods
-//quantifiers
+﻿//innerjoin join
+//leftjoin leftouterJoin
+//rightJoin rightouterjoin
+//fulljoin
 
-
-
-//Data for the student class
 using DevMatrcis;
 
-List<Student> students = new List<Student>
-{
-    new Student { StudentId = 1, StudentName = "John", StudentAge = 20 },
-    new Student { StudentId = 2, StudentName = "Jane", StudentAge = 22 },
-    new Student { StudentId = 3, StudentName = "Bob", StudentAge = 19 },
-    new Student { StudentId = 4, StudentName = "Alice", StudentAge = 21 },
-    new Student { StudentId = 5, StudentName = "Tom", StudentAge = 23 },
-    new Student { StudentId = 6, StudentName = "Alice", StudentAge = 24 }
-
+List<Employee> employee = new List<Employee>() 
+{ 
+    new Employee(){ Id = 1, Name = "John",Age = 36,Gender= Gender.Male, Department_id=1,},
+    new Employee(){ Id = 2, Name = "Jane",Age = 30,Gender= Gender.Female, Department_id=2,},
+    new Employee(){ Id = 3, Name = "Bob", Age = 33,Gender= Gender.Male,Department_id=1,},
+    new Employee(){Id = 4, Name = "Alice", Age = 40, Gender = Gender.Female, Department_id = 6},
+    new Employee(){Id = 5, Name = "Tom", Age = 31, Gender = Gender.Male, Department_id = 2},
+    new Employee(){Id = 6, Name = "Jerry", Age = 26, Gender = Gender.unknown, Department_id = 3},
+    new Employee(){Id = 7, Name = "Mike", Age = 22, Gender = Gender.Male, Department_id = 4},
+    new Employee(){Id = 8, Name = "Sara", Age = 29, Gender = Gender.Female, Department_id = 2},
+    new Employee(){Id = 9, Name = "David", Age = 25, Gender = Gender.Male, Department_id = 4},
+    new Employee(){Id = 10, Name = "Emma", Age = 32, Gender = Gender.Female},
 };
 
-//aggregate method
-//min,max,sum,avarage,count,aggregate
-var studentmax = students.Max(s => s.StudentAge);
-Console.WriteLine(studentmax);
 
-var studentmin = students.Min(s => s.StudentAge);
-Console.WriteLine(studentmin);
-var studentavg = students.Average(s => s.StudentAge);
-Console.WriteLine(studentavg);
-var studentcount = students.Count();
-Console.WriteLine(studentcount);
-var studentsum = students.Sum(s => s.StudentAge);
-Console.WriteLine(studentsum);
-var studentlongcount = students.LongCount();
-Console.WriteLine(studentlongcount);
+List<Departments> departments = new List<Departments>()
+{
+    new Departments(){ Id = 1, Name = "HR", Location = "New York"},
+    new Departments(){ Id = 2, Name = "IT", Location = "San Francisco"},
+    new Departments(){ Id = 3, Name = "Finance", Location = "Chicago"},
+    new Departments(){ Id = 4, Name = "Marketing", Location = "Los Angeles"},
+    new Departments(){ Id = 5, Name = "Sales", Location = "Houston"},
+};
 
-//quantifiers
-//all, any, contains
+//innerjoin
+//query syntax
+var innerJoin = from emp in employee
+                join dept in departments on emp.Department_id equals dept.Id
+                select new { emp.Name, emp.Gender,
+                  deptname =  dept.Name, dept.Location };
 
-var allstudentage = students.All(s => s.StudentAge > 19);
-Console.WriteLine(allstudentage);
-var anystudentage = students.Any(s => s.StudentAge > 23);
-Console.WriteLine(anystudentage);
-
-var std = new Student {StudentId = 3, StudentName = "Bob", StudentAge = 19  };
-List<string> alphalist = new List<string> { "A", "B", "C", "D", "E" };
-
-var containresult = students.Contains(std);
-Console.WriteLine(containresult);
+//method syntax
+var innerJoinMethod = employee.Join(departments, emp => emp.Department_id, dept => dept.Id,
+    (emp, dept) => new {
+        emp.Name, emp.Gender,
+        deptname = dept.Name,
+        dept.Location });
 
 
 
+//leftouter join
 
+//foreach (var item in innerJoin)
+//{
+//    Console.WriteLine($"Name: { item.Name}, Gender: { item.Gender},Department Name: { item.deptname}, Location: { item.Location}");
+// }
 
-
-
-
-
-
-//conversion method
-var results = students.Select(s => s.StudentName).ToList();
-var result = students.Select(s => s.StudentName).ToArray();
-var data = students.ToDictionary(s => s.StudentId, s => s.StudentName);
-
-results.Sort();
-
-////element operators
-////first, firstordefault,
-////last, lastordefault,
-////single, singleordefault,
-////elementat, elementatordefault
-//List<string> alphalist = new List<string> { "A", "B", "C", "D", "E" };
-//List<int> numlist = new List<int> {327, 890};
-//List<string> alphalist2 = new List<string> {};
-//List<int> numlist2 = new List<int> { };
-////Console.WriteLine(alphalist.FirstOrDefault());
-////Console.WriteLine(numlist.LastOrDefault());
-////Console.WriteLine(alphalist.SingleOrDefault(x =>x =="F" ));
-////Console.WriteLine(numlist.SingleOrDefault());
-////Console.WriteLine(alphalist.ElementAt(10));
-//Console.WriteLine(numlist.ElementAtOrDefault(2));
-
-
-
-Console.ReadKey();
+//leftjoin 
+//query syntax
+ var leftJoin = from emp in employee
+                join dept in departments on emp.Department_id equals dept.Id into empDept
+                from dept in empDept.DefaultIfEmpty()
+                select new { emp.Name, emp.Gender,
+                    deptname = dept != null ? dept.Name : "No Department",
+                    Location = dept != null ? dept.Location : "No Location" };
+foreach (var item in leftJoin)
+{
+    Console.WriteLine($"Name: {item.Name}, Gender: {item.Gender},Department Name: {item.deptname}, Location: {item.Location}");
+}
