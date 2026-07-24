@@ -1,43 +1,11 @@
-﻿using System.Runtime.ExceptionServices;
+﻿//path
+string path = @"C:\Document\Vocabulary.txt";
+string Sentence = "Hello, we are here";
 
-internal class Program
-{
-    private static void Main(string[] args)
-    {
-        LastProcess();
-        Firstprocess();
-        Console.ReadKey();
-    }
+File.WriteAllText(path, Sentence);
 
-    //synchronous method
-    static void Firstprocess()
-    {
-        Console.WriteLine("welcome to the first process world");
-        Console.WriteLine("First process starting now .........");
-        Console.WriteLine("First process completed");
-    }
+var value =File.ReadAllText(path);
+Console.WriteLine(value);
 
-    //asynchronous method
-    static async Task LastProcess()
-    {
-        Console.WriteLine("welcome to the last process world");
-        await Task.Delay(3000);
-        Console.WriteLine("last process starting now .........");
-        Console.WriteLine("last process completed");
-        await DataReturnProcess();
-    }
-
-    static async Task<bool> DataReturnProcess()
-    {
-        return true;
-    }
-    static bool DataProcess()
-    {
-        return true;
-    }
-    static async Task LongDataReturnProcess()
-    {
-
-    }
-
-}
+var valu2 = Directory.GetParent(path);
+Console.WriteLine(valu2);
